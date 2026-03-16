@@ -13,14 +13,13 @@ O projeto adota a **Arquitetura Medallion** em um sistema de arquivos local (`c:
 Os dados ingeridos são salvos em estruturas de pastas orientadas a datas (`{date_of_collect}`) com o formato `DD-MM-YYYY` em todas as camadas, facilitando a recuperação e governança diária.
 
 ## 2. Decisões de Extração (Camada Raw)
-A extração é feita via REST API para o **TMDB (The Movie Database)**.
+A extração é feita via API para o **TMDB (The Movie Database)**.
 - **Processo**: São coletados filmes populares (`movie/now_playing`) e os gêneros associados (`genre/movie/list`).
-- **Data Quality Ingestion_Time**: Foi adicionada uma coluna sintética de `ingestion_time` via Python nativo (formato ISO) direto na resposta JSON antes de salvar, permitindo versionamento temporal das extrações.
-- **Armazenamento**: O payload original é salvo usando a biblioteca padrão de `json` do Python. 
+- **Data Quality Ingestion_Time**: Foi adicionada uma coluna de `ingestion_time` direto na resposta JSON antes de salvar, permitindo versionamento temporal das extrações.
+- **Armazenamento**: O retorno original é salvo usando a biblioteca padrão de `json` do Python. 
 
 ## 3. Decisões de Transformação e Tratamento (Python & Pandas)
-O processamento usa **Pandas** pelo seu suporte nativo ao formato Parquet (eficiente, fortemente tipado e com compressão) e facilidades analíticas de transformação:
-
+O processamento usa **Pandas** pelo seu suporte nativo ao formato Parquet.
 ### Conversão Raw → Bronze
 - Leitura direta via `pd.read_json` e exportação instantânea via `to_parquet()`. O objetivo é tirar o dado rápido de JSON (custoso de processar em bulk) e colocar como Parquet, garantindo melhor performance nos passos de tratamento.
 
