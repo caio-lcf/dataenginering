@@ -31,7 +31,4 @@ O tratamento principal do dado e normalização ocorre nesta etapa:
 4. **Renomeação**: Padronização dos schemas com nomes mais significativos, renomeando a chave interna `id_x` para `movie_id`, e `name` (genérico) para `genre_name`.
 
 ## 4. Gerenciamento de Dependências e Configuração (`config.py`)
-- **Centralização:** Paths (Raw, Bronze, etc.), Endpoints e Variáveis de data ficam isolados em um script de configuração dedicado, facilitando a escalabilidade.
-
-## Próximos Passos (To-Dos mapeados no código)
-- Tratar cenários com múltiplas páginas e paginação na chamada da API (`Pegar mais páginas`).
+- **Centralização:** Paths (Raw, Bronze, etc.), Endpoints e Variáveis de data ficam isolados em um script de configuração dedicado.
