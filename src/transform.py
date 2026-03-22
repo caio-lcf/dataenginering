@@ -1,4 +1,3 @@
-# %%
 import os
 import pandas as pd
 from datetime import datetime
@@ -10,24 +9,20 @@ from config import (
     movie_parquet_output, genre_parquet_output, 
     cleared_movie_parquet_output)
 
-# %%
 def json_to_parquet(input_path:str, output_path:str) -> pd.DataFrame:
     df = pd.read_json(f"{input_path}")
     os.makedirs(os.path.dirname(output_path), exist_ok=True)
     df.to_parquet(f"{output_path}", index=False)
 
-# %%
 def read_popular_movie(path:str) -> pd.DataFrame:
     popular_movie_df = pd.read_parquet(f"{path}")
     popular_movie_df.head(2)
     return popular_movie_df
 
-# %%
 def read_genre_data (path:str):
     genre_df = pd.read_parquet(f"{path}")
     return genre_df
 
-# %%
 def clear_popular_movie_df (df:pd.DataFrame, genre_df) -> pd.DataFrame:
     df = (df 
     .explode("genre_ids")
@@ -45,7 +40,6 @@ def clear_popular_movie_df (df:pd.DataFrame, genre_df) -> pd.DataFrame:
     )
     return df
 
-# %%
 def save_cleared_df(df:pd.DataFrame, output_path:str) -> pd.DataFrame:
     os.makedirs(os.path.dirname(output_path), exist_ok=True)
     df.to_parquet(f"{output_path}", index=False)
