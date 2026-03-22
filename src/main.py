@@ -9,21 +9,21 @@ logging.basicConfig(
 )
 
 def main():
-    logging.info("Iniciando o Pipeline de Dados...")
+    logging.info("Starting the Data Pipeline...")
     
     try:
-        logging.info(">>> Iniciando Passo 1: Extração (TMDB API) <<<")
+        logging.info(">>> Starting Step 1: Extraction (TMDB API) <<<")
         run_extraction()
-        logging.info(">>> Passo 1 Concluído! <<<")
+        logging.info(">>> Step 1 Complete! <<<")
         
-        logging.info(">>> Iniciando Passo 2: Transformação (JSON para Parquet) <<<")
+        logging.info(">>> Starting Step 2: Transformation (JSON to Parquet) <<<")
         run_transform()
-        logging.info(">>> Passo 2 Concluído! <<<")
+        logging.info(">>> Step 2 Complete! <<<")
         
-        logging.info("Pipeline executado com sucesso! Carga de dados finalizada.")
+        logging.info("Pipeline executed successfully! Data load finished.")
         
     except Exception as e:
-        logging.error(f"Ocorreu um erro durante a execução do pipeline: {e}")
+        logging.error(f"An error occurred during pipeline execution: {e}")
         import sys
         sys.exit(1)
 
