@@ -18,3 +18,14 @@ This project is a data engineering pipeline that extracts popular movie data and
 
 - Ensure you have a `.env` file with your `TMDB_TOKEN`.
 - Install the required packages (e.g., `requests`, `pandas`, `python-dotenv`, `pyarrow`/`fastparquet`).
+
+# To run the pipeline:
+Runs the pipeline locally:
+
+docker compose up --build
+
+The archives will be saved in the `data` folder with de format `data/raw/YYYY-MM-DD` and `data/bronze/YYYY-MM-DD` and `data/silver/YYYY-MM-DD`.
+
+# Obs:
+You need to have docker installed on your machine to run a docker compose command.
+

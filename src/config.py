@@ -7,10 +7,13 @@ load_dotenv()
 TMDB_TOKEN = os.getenv("TMDB_TOKEN")
 movie_data_endpoint = "https://api.themoviedb.org/3/movie/now_playing?language=en-US&page=1"
 genre_id_endpoint = "https://api.themoviedb.org/3/genre/movie/list?language=en"
-raw_path = '../data/raw'
-bronze_path = '../data/bronze'
-silver_path = '../data/silver'
-gold_path = '../data/gold'
+
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+
+raw_path = os.path.join(BASE_DIR, 'data', 'raw')
+bronze_path = os.path.join(BASE_DIR, 'data', 'bronze')
+silver_path = os.path.join(BASE_DIR, 'data', 'silver')
+gold_path = os.path.join(BASE_DIR, 'data', 'gold')
 date_of_collect = datetime.now().strftime("%d-%m-%Y")
 movie_json_path = f'{raw_path}/{date_of_collect}/popular_movie.json'
 genre_json_path = f'{raw_path}/{date_of_collect}/genre_data.json'

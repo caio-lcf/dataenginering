@@ -6,10 +6,12 @@ import json
 from config import TMDB_TOKEN, movie_data_endpoint, genre_id_endpoint, raw_path, bronze_path, date_of_collect
 from datetime import datetime
 
-dirs = ["raw","bronze", "silver", "gold"]
+from config import raw_path, bronze_path, silver_path, gold_path
+
+dirs = [raw_path, bronze_path, silver_path, gold_path]
 def create_dirs(dirs_list:list):
-    for dirs in dirs_list:
-        os.makedirs(f"../data/{dirs}", exist_ok=True)
+    for dir_path in dirs_list:
+        os.makedirs(dir_path, exist_ok=True)
     return None
 create_dirs(dirs)
 
@@ -36,17 +38,12 @@ def save_raw_json(path:str, getted_data:str, archive_name:str):
     os.makedirs(f"{path}/{date_of_collect}", exist_ok=True)
     with open (f'{path}/{date_of_collect}/{archive_name}.json', 'w') as w:
         json.dump(getted_data, w, indent=4)
-    return print(f"Archive downloaded at {path}/{date_of_collect}")
 
-movie_data = get_movie_data(movie_data_endpoint, TMDB_TOKEN)
-genre_data = get_genre_id(genre_id_endpoint,TMDB_TOKEN)
+def run_extraction():
+    movie_data = get_movie_data(movie_data_endpoint, TMDB_TOKEN)
+    genre_data = get_genre_id(genre_id_endpoint,TMDB_TOKEN)
+    save_raw_json (raw_path, movie_data, "popular_movie")
+    save_raw_json (raw_path, genre_data, "genre_data")  
 
-save_raw_json (raw_path, movie_data, "popular_movie")
-save_raw_json (raw_path, genre_data, "genre_data")  
-
-
-
-teste = get_movie_data("https://api.themoviedb.org/3/movie/now_playing?language=en-US&page=90", TMDB_TOKEN)
-print(teste)
 
 

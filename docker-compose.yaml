@@ -1,0 +1,11 @@
+version: '3.8'
+
+services:
+  pipeline:
+    image: pipeline-tmdb
+    build: .
+    container_name: data-pipeline-tmdb
+    env_file:
+      - .env
+    volumes:
+      - ./data:/src/data
