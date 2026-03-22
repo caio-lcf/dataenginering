@@ -1,10 +1,8 @@
 import logging
 
-# Importando as funções que você acabou de criar!
 from extract import run_extraction
 from transform import run_transform
 
-# Configura logs básicos para acompanharmos a execução no Docker (ou local)
 logging.basicConfig(
     level=logging.INFO,
     format='%(asctime)s - %(levelname)s - %(message)s'
@@ -14,12 +12,10 @@ def main():
     logging.info("Iniciando o Pipeline de Dados...")
     
     try:
-        # 1. Passo de Extração
         logging.info(">>> Iniciando Passo 1: Extração (TMDB API) <<<")
         run_extraction()
         logging.info(">>> Passo 1 Concluído! <<<")
         
-        # 2. Passo de Transformação
         logging.info(">>> Iniciando Passo 2: Transformação (JSON para Parquet) <<<")
         run_transform()
         logging.info(">>> Passo 2 Concluído! <<<")
@@ -28,7 +24,6 @@ def main():
         
     except Exception as e:
         logging.error(f"Ocorreu um erro durante a execução do pipeline: {e}")
-        # Retorna um código de erro para o sistema operacional / Docker
         import sys
         sys.exit(1)
 
